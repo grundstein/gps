@@ -2,7 +2,7 @@
 
 import cli from '@magic/cli'
 
-import run from './index.mjs'
+import run from './server.mjs'
 
 const args = {
   options: [
