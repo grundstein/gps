@@ -1,10 +1,10 @@
 {
-  "name": "@grundstein/server",
+  "name": "@grundstein/gps",
   "version": "0.0.1-alpha.0",
   "author": "Wizards & Witches",
-  "homepage": "https://grundstein.github.io/server",
+  "homepage": "https://docs.grundstein.it/gps",
   "license": "AGPL-3.0",
-  "description": "NOT YET BENCHMARKED OR IN PRODUCTION! @grundstein/server. serves static webapps and their apis. caches what it can.",
+  "description": "NOT YET BENCHMARKED OR IN PRODUCTION! @grundstein/gps. grundstein positioning service, internal dns",
   "main": "src/index.mjs",
   "engines": {
     "node": ">=13.5.0"
@@ -14,34 +14,31 @@
     "start": "npm run dev",
     "test": "t",
     "format": "f -w",
-    "dev": "src/bin.mjs serve"
+    "dev": "src/bin.mjs"
   },
   "bin": {
-    "grundstein-magic-server": "src/bin.mjs",
-    "gms": "src/bin.mjs"
+    "grundstein-positioning-system": "src/bin.mjs",
+    "gps": "src/bin.mjs"
   },
   "files": [
     "src"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/grundstein/server.git"
+    "url": "git+https://github.com/grundstein/gps.git"
   },
   "bugs": {
-    "url": "https://github.com/grundstein/server/issues"
+    "url": "https://github.com/grundstein/gps/issues"
   },
   "dependencies": {
-    "@grundstein/file-store": "github:grundstein/file-store",
-    "@magic/cli": "0.0.23",
-    "@magic/deep": "0.1.2",
-    "@magic/fs": "0.0.5",
+    "@grundstein/commons": "github:grundstein/commons",
+    "@magic/cli": "0.0.24",
     "@magic/log": "0.1.4",
-    "@magic/mime-types": "0.0.2",
     "@magic/types": "0.1.11"
   },
   "devDependencies": {
-    "@magic/format": "0.0.7",
-    "@magic/test": "0.1.40"
+    "@magic/format": "0.0.8",
+    "@magic/test": "0.1.41"
   },
   "keywords": [
     "grundstein",
