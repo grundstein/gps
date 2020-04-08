@@ -4,7 +4,7 @@ import log from '@magic/log'
 
 import defaultStore from '@grundstein/file-store'
 
-import { initStore, initApi } from './init/index.mjs'
+import { initStore } from './init/index.mjs'
 import { handler as defaultHandler } from './handler.mjs'
 
 export const run = async (config = {}) => {
@@ -16,19 +16,12 @@ export const run = async (config = {}) => {
     fileStore = defaultStore,
   } = config
 
-  const { port = 8080, host = '127.0.0.1', dir = 'public', noFiles = false, noApi = false } = args
+  const { port = 8080, host = '127.0.0.1', dir = 'static/public' } = args
 
   try {
-    const store = noFiles === false ? await initStore(dir, fileStore) : null
+    const store = await initStore(dir, fileStore)
 
-    const api = noApi === false ? await initApi(dir) : null
-
-    if (!store && !api) {
-      log.error('No api and no static files, this server has nothing to do.', 'E_NO_TASKS')
-      process.exit(1)
-    }
-
-    const server = http.createServer(handler({ store, api }))
+    const server = http.createServer(handler(store))
 
     server.on('clientError', (err, socket) => {
       socket.end('HTTP/1.1 400 Bad Request\r\n\r\n')
