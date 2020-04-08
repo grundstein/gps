@@ -17,8 +17,8 @@
     "dev": "src/bin.mjs serve"
   },
   "bin": {
-    "grundstein-server": "src/bin.mjs",
-    "gs-server": "src/bin.mjs"
+    "grundstein-magic-server": "src/bin.mjs",
+    "gms": "src/bin.mjs"
   },
   "files": [
     "src"
