@@ -1,1 +1,1 @@
-export hosts from './hosts.mjs'
+export * as default from './hosts.mjs'

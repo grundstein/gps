@@ -3,17 +3,24 @@ import http from 'http'
 import log from '@magic/log'
 
 import handler from './handler.mjs'
-import hosts from './hosts.mjs'
+import hosts from './index.mjs'
+
+const sortByPort = list => list.sort((a, b) => a.port - b.port)
 
 export const run = async (config = {}) => {
-  const startTime = log.hrtime()
-
-  const { args = {} } = config
-
-  const { port = 23230, host = '127.0.0.1', dir = 'static/public' } = args
-
   try {
-    const hostString = JSON.stringify(hosts, null, 2)
+    const startTime = log.hrtime()
+
+    const { args = {} } = config
+
+    const { port = 23230, host = '127.0.0.1', dir = 'static/public' } = args
+
+    // sort hosts by port
+    const hostList = Object.entries(hosts).sort((([_, a], [_2, b]) => a.port - b.port))
+    const sortedHosts = Object.fromEntries(hostList)
+
+    // nicely format the string using JSON.stringify
+    const hostString = JSON.stringify(sortedHosts, null, 2)
 
     const server = http.createServer(handler(hostString))
 
