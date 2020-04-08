@@ -1,6 +1,6 @@
 import http from 'http'
 
-import log from '@magic/log'
+import { log } from '@grundstein/commons'
 
 import handler from './handler.mjs'
 import hosts from './index.mjs'
