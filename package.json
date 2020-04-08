@@ -33,7 +33,6 @@
   "dependencies": {
     "@grundstein/commons": "github:grundstein/commons",
     "@magic/cli": "0.0.24",
-    "@magic/log": "0.1.4",
     "@magic/types": "0.1.11"
   },
   "devDependencies": {
