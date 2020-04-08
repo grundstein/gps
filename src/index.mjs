@@ -16,7 +16,7 @@ export const run = async (config = {}) => {
     fileStore = defaultStore,
   } = config
 
-  const { port = 8080, host = '127.0.0.1', dir = 'static/public' } = args
+  const { port = 23230, host = '127.0.0.1', dir = 'static/public' } = args
 
   try {
     const store = await initStore(dir, fileStore)
