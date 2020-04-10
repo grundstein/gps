@@ -7,3 +7,29 @@ export const gms = { host: '127.0.0.1', port: 2350, name: 'grundstein magic serv
 export const gas = { host: '127.0.0.1', port: 2351, name: 'grundstein api server' }
 export const gss = { host: '127.0.0.1', port: 2352, name: 'grundstein static server' }
 export const gbs = { host: '127.0.0.1', port: 2353, name: 'grundstein build service' }
+
+export const pods = {
+  '127.0.0.1': {
+    'dev.grundstein.it': {
+      services: [
+        'gms',
+        'gas',
+      ],
+      git: {
+        org: 'grundstein',
+        repo: 'grundstein.it',
+        branch: 'master',
+      },
+    },
+    'test.dev.grundstein.it': {
+      services: [
+        'gms',
+      ],
+      git: {
+        org: 'grundstein',
+        repo: 'grundstein.it',
+        branch: 'master'
+      }
+    },
+  },
+}
