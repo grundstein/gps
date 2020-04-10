@@ -19,15 +19,15 @@ const args = {
     name: 'gps: grundstein proxy/positioning server',
     header: 'load balancer. public app entry point. single point of failure.',
     options: {
-      '--host': 'internal hostname to listen to, default grundstein',
-      '--port': 'port, default 8080',
+      '--host': 'internal hostname to listen to, default 127.0.0.1',
+      '--port': 'port, default 4443',
     },
     example: `
 # run proxy and positioning services:
 gps
 
-# serve files using an absolute path, a custom host and port 80
-gms --host grundstein.it --port 443
+# serve files using an absolute path, a custom host and port 443.
+gps --host grundstein.it --port 443
 `,
   },
 }
