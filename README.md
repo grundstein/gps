@@ -1,6 +1,6 @@
 ## @grundstein/gps
 
-### WIP. NOT IN PRODUCTION YET!
+### WIP. NOT IN PRODUCTION, TESTED AND/OR BENCHMARKED YET!
 
 ### gps: grundstein proxy/positioning server
 
@@ -9,9 +9,10 @@
 #### central config "database"
 serves /config/ which responds with a json file including all grundstein services and their config.
 
-#### maintenance fallback
+#### 404/500 fallback
 
-serves maintenance information page if services are down.
+* serves 404 page if services are down.
+* serves 50+ error pages if services error.
 
 #### proxy
 
@@ -25,6 +26,8 @@ publicly proxies various services:
   WIP static service - serves bigger static files via cdn instead of gms
 * [ghs](https://github.com/grundstein/ghs)
   WIP health service - serves health status pages for all hosted pages
+* [gul](https://github.com/grundstein/gul)
+  WIP universal logger - serves logs for all hosted pages, both via rest api and static html.
 * [...]
 
 #### installation
@@ -40,6 +43,6 @@ gps --help
 // run full gps service on https://127.0.0.1:4443
 gps
 
-// serve on specific port and host
-gps --port 443 --host grundstein.it
+// serve on specific host and port
+grs --host grundstein.it --port 443
 ```
