@@ -1,6 +1,6 @@
 import http from 'http'
 
-import { log } from '@grundstein/commons'
+import { log, middleware } from '@grundstein/commons'
 
 import handler from './handler.mjs'
 import hosts from './index.mjs'
@@ -13,7 +13,7 @@ export const run = async (config = {}) => {
 
     const { args = {} } = config
 
-    const { port = 4443, host = '127.0.0.1' } = args
+    const { host = '127.0.0.1', port = 4443 } = args
 
     // sort hosts by port
     const hostList = Object.entries(hosts).sort(([_, a], [_2, b]) => a.port - b.port)
@@ -28,14 +28,9 @@ export const run = async (config = {}) => {
       socket.end('HTTP/1.1 400 Bad Request\r\n\r\n')
     })
 
-    server.listen(port, host, () => {
-      const timeToListen = process.hrtime(startTime)
+    const listener = middleware.listener({ startTime, host, port })
 
-      log.success('Mainthread started', `pid: ${process.pid}`)
-      log(`server listening to ${host}:${port}`)
-
-      log.timeTaken(startTime, 'startup needed:')
-    })
+    server.listen(port, host, listener)
   } catch (e) {
     log.error(e)
     process.exit(1)
