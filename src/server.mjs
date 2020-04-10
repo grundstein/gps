@@ -16,7 +16,7 @@ export const run = async (config = {}) => {
     const { port = 4443, host = '127.0.0.1' } = args
 
     // sort hosts by port
-    const hostList = Object.entries(hosts).sort((([_, a], [_2, b]) => a.port - b.port))
+    const hostList = Object.entries(hosts).sort(([_, a], [_2, b]) => a.port - b.port)
     const sortedHosts = Object.fromEntries(hostList)
 
     // nicely format the string using JSON.stringify
