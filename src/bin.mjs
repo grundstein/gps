@@ -7,31 +7,27 @@ import run from './server.mjs'
 const args = {
   options: [
     ['--help', '-help', 'help', '--h', '-h'],
-    // ['--watch', '-w'],
-    ['--dir', '--public', '--public-dir', '-p'],
     ['--host', '-h'],
     ['--port', '-p'],
   ],
   default: {
-    '--dir': 'public',
     '--host': '127.0.0.1',
-    '--port': 8080,
+    '--port': 4443,
   },
-  single: ['--dir', '--host', '--port', '--no-Api', '--no-Files'],
+  single: ['--host', '--port'],
   help: {
-    name: 'gms: grundstein magic server',
-    header: 'serves prebuilt magic pages.',
+    name: 'gps: grundstein proxy/positioning server',
+    header: 'load balancer. public app entry point. single point of failure.',
     options: {
-      '--dir': 'root for both api and static directories',
       '--host': 'internal hostname to listen to, default grundstein',
       '--port': 'port, default 8080',
     },
     example: `
-# serve files in ./public:
-gms
+# run proxy and positioning services:
+gps
 
 # serve files using an absolute path, a custom host and port 80
-gms --dir /public --host example.com --port 80
+gms --host grundstein.it --port 443
 `,
   },
 }
