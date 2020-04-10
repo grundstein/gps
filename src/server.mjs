@@ -13,7 +13,7 @@ export const run = async (config = {}) => {
 
     const { args = {} } = config
 
-    const { port = 23230, host = '127.0.0.1', dir = 'static/public' } = args
+    const { port = 23230, host = '127.0.0.1' } = args
 
     // sort hosts by port
     const hostList = Object.entries(hosts).sort((([_, a], [_2, b]) => a.port - b.port))
