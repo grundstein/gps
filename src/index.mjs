@@ -4,7 +4,7 @@ import { log, middleware } from '@grundstein/commons'
 
 import handler from './handler.mjs'
 
-export const run = async (config = {}) => {
+export const gps = async (config = {}) => {
   try {
     const startTime = log.hrtime()
 
@@ -36,4 +36,4 @@ export const run = async (config = {}) => {
   }
 }
 
-export default run
+export default gps
