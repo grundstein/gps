@@ -1,11 +1,18 @@
 import { lib, log } from '@grundstein/commons'
 
-export const handler = string => (req, res) => {
-  const startTime = log.hrtime()
+export const handler = config => (req, res) => {
+  const time = log.hrtime()
 
-  lib.respond(res, { code: 200, body: string })
+  if (req.url === '/hosts' || req.url === '/hosts/') {
+    lib.respond(req, res, { code: 200, body: config.hostBody, time })
+    return
+  }
 
-  log.timeTaken(startTime, 'hosts file response took')
+  if (req.url === '/repos' || req.url === '/repos/') {
+    lib.respond(req, res, { code: 200, body: config.repoBody, time });
+  }
+
+  lib.respond(req, res, { code: 404, body: '404 - not found', time })
 }
 
 export default handler
