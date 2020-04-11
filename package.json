@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@grundstein/commons": "github:grundstein/commons",
+    "@grundstein/grundstein.hosts": "github:grundstein/grundstein.hosts",
     "@magic/cli": "0.0.24",
     "@magic/types": "0.1.11"
   },
