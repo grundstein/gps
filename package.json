@@ -27,10 +27,7 @@
     "url": "https://github.com/grundstein/gps/issues"
   },
   "dependencies": {
-    "@grundstein/commons": "github:grundstein/commons",
-    "@grundstein/grundstein.hosts": "github:grundstein/grundstein.hosts",
-    "@magic/cli": "0.0.24",
-    "@magic/types": "0.1.11"
+    "@grundstein/commons": "github:grundstein/commons"
   },
   "devDependencies": {
     "@magic/format": "0.0.8",
