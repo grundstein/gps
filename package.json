@@ -16,6 +16,10 @@
     "format": "f -w",
     "dev": "src/bin.mjs"
   },
+  "bin": {
+    "grundstein-proxy-service": "src/bin.mjs",
+    "gps": "src/bin.mjs"
+  },
   "files": [
     "src"
   ],
