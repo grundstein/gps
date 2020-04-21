@@ -32,7 +32,8 @@
   },
   "dependencies": {
     "@grundstein/commons": "github:grundstein/commons",
-    "@magic/cli": "0.0.24"
+    "@magic/cli": "0.0.24",
+    "@magic/fs": "0.0.5"
   },
   "devDependencies": {
     "@magic/format": "0.0.8",
