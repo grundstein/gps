@@ -1,31 +1,48 @@
-import { log } from '@grundstein/commons'
+import path from 'path'
+
+import http from 'http'
+import https from 'https'
+
+import { log, middleware } from '@grundstein/commons'
+
+import fs from '@magic/fs'
 
 import proxy from './proxy.mjs'
-import server from './server.mjs'
 
 export const gps = async (config = {}) => {
   try {
     const startTime = log.hrtime()
 
-    const { host = '127.0.0.1' } = config
+    const { host = '0.0.0.0', port = 4343 } = config
 
-    if (!config.hosts) {
-      log.error('No hosts specified. grundstein does not know what to do.')
-      process.exit(0)
+    const cwd = process.cwd()
+    const certDir = path.join(cwd, 'certificates')
+
+    let connector = http
+
+    const options = {}
+
+    const privCertFile = path.join(certDir, 'priv.pem')
+    const pubCertFile = path.join(certDir, 'pub.pem')
+
+    try {
+      options.key = await fs.readFile(privCertFile)
+      options.cert = await fs.readFile(pubCertFile)
+      connector = https
+    } catch(e) {
+       if (e.code !== 'ENOENT') {
+         throw e
+       }
     }
 
-    if (!config.repos) {
-      log.error('No repos specified. grundstein does not know what to do.')
-      process.exit(0)
-    }
+    const server = connector.createServer(options, proxy)
 
-    config.repoBody = JSON.stringify(config.repos, null, 2)
-    config.hostBody = JSON.stringify(config.hosts, null, 2)
+    server.on('connection', socket => {
+      socket.setNoDelay(true)
+    })
 
-    // run the proxy on port 443
-    proxy(config)
-    // run the redirection server on port 80
-    server(config)
+    const listener = middleware.listener({ host, port, startTime })
+    server.listen(port, host, listener)
   } catch (e) {
     log.error(e)
     process.exit(1)
