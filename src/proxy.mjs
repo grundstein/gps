@@ -1,72 +1,39 @@
-import net from 'net'
+import https from 'https'
+import http from 'http'
 
-const defaultConfig = {
-  host: '127.0.0.1',
-  port: '443',
-}
+import { log } from '@grundstein/commons'
 
-export const proxy = (config = {}) => {
-  config = {
-    ...defaultConfig,
-    ...config,
+// import memStore from '@grundstein/mem-store'
+
+const libName = '@grundstein/gps.proxy'
+
+export const proxy = (req, res) => {
+  const startTime = process.hrtime()
+
+  const remoteOptions = {
+    hostname: 'localhost',
+    port: 2350,
+    path: req.url,
   }
 
-  const server = net.createServer()
+  http.get(remoteOptions, proxyRes => {
+    proxyRes.pipe(res)
 
-  server.on('connection', clientSocket => {
-    console.log('Client Connected To Proxy')
+    // const response = []
 
-    clientSocket.once('data', (data) => {
-      const isTLSConnection = data.toString().includes('CONNECT')
+    // proxyRes.on('data', chunk => {
+    //   response.push(chunk)
+    // })
 
-      if (!isTLSConnection) {
-        // non tls connections should never end up here.
-        return
-      }
+    proxyRes.on('end', () => {
+      log.timeTaken(startTime, `${libName} req end:`)
+      // TODO: write response to mem-store
+    })
 
-      const host = data.toString().split('CONNECT ')[1].split(' ')[0].split(':')[0]
-      const port = data.toString().split('CONNECT ')[1].split(' ')[0].split(':')[1]
-
-      console.log(host, port)
-
-      const serverSocket = net.createConnection({
-        host,
-        port,
-      }, () => {
-        console.log('PROXY TO SERVER SET UP')
-        clientSocket.write('HTTP/1.1 200 OK\r\n\n')
-
-        clientSocket.pipe(serverSocket)
-        serverSocket.pipe(clientSocket)
-
-        serverSocket.on('error', (err) => {
-          console.log('PROXY TO SERVER ERROR')
-          console.log(err)
-        })
-      })
-
-      clientSocket.on('error', err => {
-        console.log('CLIENT TO PROXY ERROR')
-        console.log(err)
-      })
+    proxyRes.on('error', err => {
+      log.error('E_UNKNOWN', err)
     })
   })
-
-  server.on('error', (err) => {
-    console.log('SERVER ERROR')
-    console.log(err)
-    throw err
-  })
-
-  server.on('close', () => {
-    console.log('Client Disconnected')
-  })
-
-  server.listen(config.port, () => {
-    console.log(`Server running at ${config.host}:${config.port}`)
-  })
-
-  return server
 }
 
 export default proxy
