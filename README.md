@@ -44,5 +44,5 @@ gps --help
 gps
 
 // serve on specific host and port
-grs --host grundstein.it --port 443
+gps --host grundstein.it --port 443
 ```
