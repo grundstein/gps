@@ -3,9 +3,7 @@ import path from 'path'
 import http from 'http'
 import https from 'https'
 
-import { log, middleware } from '@grundstein/commons'
-
-import fs from '@magic/fs'
+import { fs, log, middleware } from '@grundstein/commons'
 
 import proxy from './proxy.mjs'
 
