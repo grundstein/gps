@@ -9,7 +9,7 @@ import { proxyRequest } from './proxyRequest.mjs'
 
 // import memStore from '@grundstein/mem-store'
 
-export const proxy = config => async (req, res) => {
+export const handler = config => async (req, res) => {
   const startTime = process.hrtime()
 
   try {
@@ -19,4 +19,4 @@ export const proxy = config => async (req, res) => {
   }
 }
 
-export default proxy
+export default handler
