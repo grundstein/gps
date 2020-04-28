@@ -7,12 +7,14 @@ import { log } from '@grundstein/commons'
 
 const libName = '@grundstein/gps.proxy'
 
-export const proxy = (req, res) => {
+export const proxy = config => (req, res) => {
   const startTime = process.hrtime()
 
+  const { proxyHost, proxyPort } = config
+
   const remoteOptions = {
-    hostname: 'localhost',
-    port: 2350,
+    hostname: proxyHost,
+    port: proxyPort,
     path: req.url,
   }
 
