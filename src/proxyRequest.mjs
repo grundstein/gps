@@ -1,17 +1,22 @@
 import http from 'http'
 
 import log from '@magic/log'
-import { formatLog, respond } from '@grundstein/commons/lib.mjs'
+import { formatLog, getHostname, respond } from '@grundstein/commons/lib.mjs'
 
 const libName = '@grundstein/gps.proxy'
 
 export const proxyRequest = (req, res, config) => {
   const { proxyHost, proxyPort, startTime } = config
 
+  const hostname = getHostname(req)
+
   const remoteOptions = {
     hostname: proxyHost,
     port: proxyPort,
     path: req.url,
+    headers: {
+      'x-forwarded-for': hostname,
+    },
   }
 
   return new Promise((resolve, reject) => {
