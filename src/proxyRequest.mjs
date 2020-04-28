@@ -36,7 +36,6 @@ export const proxyRequest = (req, res, config) => {
     })
 
     responder.on('error', e => {
-      formatLog(req, res, { time: log.hrtime() })
       respond(req, res, { body: '500 - proxy error.', code: 500 })
       reject(e)
     })
