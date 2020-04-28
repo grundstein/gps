@@ -11,12 +11,14 @@ const opts = {
     ['--port', '-p'],
     ['--proxy-host'],
     ['--proxy-port'],
+    ['--cert-dir', '--cert', '-c'],
   ],
   default: {
     '--host': '0.0.0.0',
     '--port': 4343,
     '--proxy-host': 'localhost',
     '--proxy-port': 2350,
+    '--cert-dir': '/home/grundstein/ca',
   },
   single: ['--host', '--port'],
   help: {
@@ -27,6 +29,7 @@ const opts = {
       '--port': 'port to listen to',
       '--proxy-host': 'host the proxied server listens to',
       '--proxy-port': 'port the proxied server listens to',
+      '--cert-dir': 'directory with ssl ca',
     },
     example: `
 # run proxy and positioning services:
