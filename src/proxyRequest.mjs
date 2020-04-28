@@ -1,9 +1,9 @@
 import http from 'http'
 
-import log from '@magic/log'
+import { log } from '@grundstein/commons'
 import { formatLog, getHostname, respond } from '@grundstein/commons/lib.mjs'
 
-const libName = '@grundstein/gps.proxy'
+const libName = '@grundstein/gps.proxyRequest'
 
 export const proxyRequest = (req, res, config) => {
   const { hostname, proxyHost, proxyPort, startTime } = config
