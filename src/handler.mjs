@@ -3,7 +3,7 @@ import http from 'http'
 
 import { log } from '@grundstein/commons'
 
-import { formatLog } from '@grundstein/commons/lib.mjs'
+import { formatLog, getHostname } from '@grundstein/commons/lib.mjs'
 
 import { proxyRequest } from './proxyRequest.mjs'
 
@@ -12,7 +12,7 @@ import { proxyRequest } from './proxyRequest.mjs'
 export const handler = config => async (req, res) => {
   const startTime = process.hrtime()
 
-  const hostname = getHostname(req)
+  let hostname = getHostname(req)
 
   // strip www from the domain
   if (hostname.startsWith('www.')) {
