@@ -6,9 +6,7 @@ import { formatLog, getHostname, respond } from '@grundstein/commons/lib.mjs'
 const libName = '@grundstein/gps.proxy'
 
 export const proxyRequest = (req, res, config) => {
-  const { proxyHost, proxyPort, startTime } = config
-
-  const hostname = getHostname(req)
+  const { hostname, proxyHost, proxyPort, startTime } = config
 
   const remoteOptions = {
     hostname: proxyHost,
