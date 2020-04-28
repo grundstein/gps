@@ -3,7 +3,7 @@ import http from 'http'
 
 import { log } from '@grundstein/commons'
 
-import { respond } from '@grundstein/commons/lib.mjs'
+import { formatLog } from '@grundstein/commons/lib.mjs'
 
 import { proxyRequest } from './proxyRequest.mjs'
 
@@ -12,8 +12,23 @@ import { proxyRequest } from './proxyRequest.mjs'
 export const handler = config => async (req, res) => {
   const startTime = process.hrtime()
 
+  const hostname = getHostname(req)
+
+  // strip www from the domain
+  if (hostname.startsWith('www.')) {
+    hostname = hostname.replace('www.', '')
+
+    res.writeHead(302, {
+      Location: `https://${hostname}${req.url}`,
+    })
+
+    formatLog(req, res, { type: 'www redirect', time: log.hrtime() })
+    res.end()
+    return
+  }
+
   try {
-    await proxyRequest(req, res, { ...config, startTime })
+    await proxyRequest(req, res, { ...config, hostname, startTime })
   } catch (e) {
     log.error(e)
   }
