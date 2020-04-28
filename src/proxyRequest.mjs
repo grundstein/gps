@@ -3,6 +3,8 @@ import http from 'http'
 import log from '@magic/log'
 import { formatLog, respond } from '@grundstein/commons/lib.mjs'
 
+const libName = '@grundstein/gps.proxy'
+
 export const proxyRequest = (req, res, config) => {
   const { proxyHost, proxyPort, startTime } = config
 

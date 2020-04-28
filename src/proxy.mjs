@@ -9,8 +9,6 @@ import { proxyRequest } from './proxyRequest.mjs'
 
 // import memStore from '@grundstein/mem-store'
 
-const libName = '@grundstein/gps.proxy'
-
 export const proxy = config => async (req, res) => {
   const startTime = process.hrtime()
 
