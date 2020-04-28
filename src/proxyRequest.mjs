@@ -15,7 +15,7 @@ export const proxyRequest = (req, res, config) => {
     port: proxyPort,
     path: req.url,
     headers: {
-      'x-forwarded-for': hostname,
+      'X-Forwarded-For': hostname,
     },
   }
 
