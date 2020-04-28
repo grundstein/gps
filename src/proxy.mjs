@@ -15,7 +15,7 @@ export const proxy = config => async (req, res) => {
   const startTime = process.hrtime()
 
   try {
-    await proxyRequest(req, res, config)
+    await proxyRequest(req, res, { ...config, startTime })
   } catch (e) {
     log.error(e)
   }

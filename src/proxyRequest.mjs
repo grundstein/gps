@@ -4,7 +4,7 @@ import log from '@magic/log'
 import { formatLog, respond } from '@grundstein/commons/lib.mjs'
 
 export const proxyRequest = (req, res, config) => {
-  const { proxyHost, proxyPort } = config
+  const { proxyHost, proxyPort, startTime } = config
 
   const remoteOptions = {
     hostname: proxyHost,
