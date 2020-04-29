@@ -18,7 +18,7 @@ const opts = {
     '--port': 4343,
     '--proxy-host': 'localhost',
     '--proxy-port': 2350,
-    '--cert-dir': '/home/grundstein/ca',
+    '--cert-dir': '/etc/letsencrypt/live',
   },
   single: ['--host', '--port'],
   help: {
