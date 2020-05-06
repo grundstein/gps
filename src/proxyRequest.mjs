@@ -6,20 +6,30 @@ import { formatLog, getHostname, respond } from '@grundstein/commons/lib.mjs'
 const libName = '@grundstein/gps.proxyRequest'
 
 export const proxyRequest = (req, res, config) => {
-  const { hostname, proxyHost, proxyPort, startTime } = config
+  const { hostname: proxiedHost, staticHost, staticPort, apiHost, apiPort, startTime } = config
+
+  let hostname = staticHost
+  let port = staticPort
+
+  if (proxiedHost.startsWith('api.')) {
+    hostname = apiHost
+    port = apiPort
+  }
 
   const remoteOptions = {
-    hostname: proxyHost,
-    port: proxyPort,
+    hostname,
+    port,
     path: req.url,
     headers: {
-      'x-forwarded-for': hostname,
+      'x-forwarded-for': proxiedHost,
     },
   }
 
   return new Promise((resolve, reject) => {
     const responder = http.get(remoteOptions, proxyRes => {
       proxyRes.pipe(res)
+
+      // TODO: write response to mem-store for caching. only do so for static files!
 
       // const response = []
 
@@ -29,7 +39,6 @@ export const proxyRequest = (req, res, config) => {
 
       proxyRes.on('end', () => {
         log.timeTaken(startTime, `${libName} req end:`)
-        // TODO: write response to mem-store
         resolve()
       })
 
