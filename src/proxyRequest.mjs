@@ -43,6 +43,7 @@ export const proxyRequest = (req, res, config) => {
       })
 
       proxyRes.on('error', e => {
+        log.error(`${libName} req error: ${e}`)
         reject(e)
       })
     })
