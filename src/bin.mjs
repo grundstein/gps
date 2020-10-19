@@ -6,9 +6,8 @@ import run from './index.mjs'
 
 const opts = {
   options: [
-    ['--help', '-help', 'help', '--h', '-h'],
-    ['--host', '-h'],
-    ['--port', '-p'],
+    ['--host', '--ip', '-H'],
+    ['--port', '-p', '-P'],
     ['--static-host'],
     ['--static-port'],
     ['--api-host'],
