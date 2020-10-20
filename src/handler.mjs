@@ -10,7 +10,7 @@ import { proxyRequest } from './proxyRequest.mjs'
 // import memStore from '@grundstein/mem-store'
 
 export const handler = config => async (req, res) => {
-  const startTime = process.hrtime()
+  const time = process.hrtime()
 
   let hostname = getHostname(req)
 
@@ -28,7 +28,7 @@ export const handler = config => async (req, res) => {
   }
 
   try {
-    await proxyRequest(req, res, { ...config, hostname, startTime })
+    await proxyRequest(req, res, { ...config, hostname, time })
   } catch (e) {
     log.error(e)
   }

@@ -6,7 +6,7 @@ import { formatLog, getHostname, respond } from '@grundstein/commons/lib.mjs'
 const libName = '@grundstein/gps.proxyRequest'
 
 export const proxyRequest = (req, res, config) => {
-  const { hostname: proxiedHost, staticHost, staticPort, apiHost, apiPort, startTime } = config
+  const { hostname: proxiedHost, staticHost, staticPort, apiHost, apiPort, time } = config
 
   let hostname = staticHost
   let port = staticPort
@@ -38,7 +38,7 @@ export const proxyRequest = (req, res, config) => {
       // })
 
       proxyRes.on('end', () => {
-        log.timeTaken(startTime, `${libName} req end:`)
+        log.timeTaken(time, `${libName} req end:`)
         resolve()
       })
 
