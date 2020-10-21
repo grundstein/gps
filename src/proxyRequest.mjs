@@ -1,7 +1,7 @@
 import http from 'http'
 
 import { log } from '@grundstein/commons'
-import { formatLog, getHostname, respond } from '@grundstein/commons/lib.mjs'
+import { respond } from '@grundstein/commons/lib.mjs'
 
 const libName = '@grundstein/gps.proxyRequest'
 
