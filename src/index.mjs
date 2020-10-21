@@ -1,9 +1,6 @@
 import path from 'path'
 
-import http from 'http'
-import https from 'https'
-
-import { fs, log, middleware } from '@grundstein/commons'
+import { log } from '@grundstein/commons'
 
 import { createServer } from '@grundstein/commons/lib.mjs'
 
