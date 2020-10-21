@@ -29,14 +29,6 @@ export const proxyRequest = (req, res, config) => {
     const responder = http.get(remoteOptions, proxyRes => {
       proxyRes.pipe(res)
 
-      // TODO: write response to mem-store for caching. only do so for static files!
-
-      // const response = []
-
-      // proxyRes.on('data', chunk => {
-      //   response.push(chunk)
-      // })
-
       proxyRes.on('end', () => {
         log.timeTaken(time, `${libName} req end:`)
         resolve()
