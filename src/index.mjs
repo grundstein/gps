@@ -1,5 +1,3 @@
-import path from 'path'
-
 import { log } from '@grundstein/commons'
 
 import { createServer } from '@grundstein/commons/lib.mjs'
