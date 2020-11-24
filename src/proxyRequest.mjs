@@ -27,6 +27,9 @@ export const proxyRequest = (req, res, config) => {
 
   return new Promise((resolve, reject) => {
     const responder = http.get(remoteOptions, proxyRes => {
+      const { statusCode, headers } = proxyRes
+      res.writeHead(statusCode, headers)
+
       proxyRes.pipe(res)
 
       proxyRes.on('end', () => {
