@@ -34,8 +34,8 @@
     "@grundstein/commons": "github:grundstein/commons"
   },
   "devDependencies": {
-    "@magic/format": "0.0.19",
-    "@magic/test": "0.1.58"
+    "@magic/format": "0.0.21",
+    "@magic/test": "0.1.60"
   },
   "keywords": [
     "grundstein",
