@@ -1,9 +1,6 @@
-import https from 'https'
-import http from 'http'
-
 import { log } from '@grundstein/commons'
 
-import { formatLog, getHostname } from '@grundstein/commons/lib.mjs'
+import { /* formatLog, */ getHostname } from '@grundstein/commons/lib.mjs'
 
 import { proxyRequest } from './proxyRequest.mjs'
 
@@ -22,7 +19,7 @@ export const handler = config => async (req, res) => {
       Location: `https://${hostname}${req.url}`,
     })
 
-    formatLog(req, res, { type: 'www redirect', time: log.hrtime() })
+    // formatLog(req, res, { type: 'www redirect', time: log.hrtime() })
     res.end()
     return
   }
