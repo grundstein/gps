@@ -35,17 +35,26 @@ export const proxyRequest = (req, res, config) => {
 
       proxyRes.on('end', () => {
         log.timeTaken(time, `${libName} req end:`)
+      
+        proxyRes.unpipe(res)
+
         resolve()
       })
 
       proxyRes.on('error', e => {
         log.error(`${libName} req error: ${e}`)
+
+        proxyRes.unpipe(res)
+
         reject(e)
       })
     })
 
     responder.on('error', e => {
       respond(req, res, { body: '500 - proxy error.', code: 500 })
+
+      proxyRes.unpipe(res)
+
       reject(e)
     })
   })
