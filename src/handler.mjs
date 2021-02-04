@@ -26,11 +26,9 @@ export const handler = config => async (req, res) => {
 
   if (!req.url.startsWith('/')) {
     respond(req, res, {
-      body = '418 - I am a Teapot',
-      code = 418,
-      headers =[],
-      time = log.hrtime(),
-      type = 'teapot-response',
+      body: '418 - I am a Teapot',
+      code: 418,
+      type: 'teapot-response',
     })
 
     return
