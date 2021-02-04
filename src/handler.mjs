@@ -1,6 +1,6 @@
 import { log } from '@grundstein/commons'
 
-import { /* formatLog, */ getHostname } from '@grundstein/commons/lib.mjs'
+import { /* formatLog, */ getHostname, respond } from '@grundstein/commons/lib.mjs'
 
 import { proxyRequest } from './proxyRequest.mjs'
 
@@ -21,6 +21,18 @@ export const handler = config => async (req, res) => {
 
     // formatLog(req, res, { type: 'www redirect', time: log.hrtime() })
     res.end()
+    return
+  }
+
+  if (!req.url.startsWith('/')) {
+    respond(req, res, {
+      body = '418 - I am a Teapot',
+      code = 418,
+      headers =[],
+      time = log.hrtime(),
+      type = 'teapot-response',
+    })
+
     return
   }
 
