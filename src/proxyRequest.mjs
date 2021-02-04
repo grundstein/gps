@@ -34,7 +34,7 @@ export const proxyRequest = (req, res, config) => {
       proxyRes.pipe(res)
 
       proxyRes.on('end', () => {
-        log.timeTaken(time, `${libName} req end:`)
+        // log.timeTaken(time, `${libName} req end:`)
 
         proxyRes.unpipe(res)
 
