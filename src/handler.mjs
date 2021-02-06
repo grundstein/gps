@@ -7,6 +7,16 @@ import { proxyRequest } from './proxyRequest.mjs'
 // import memStore from '@grundstein/mem-store'
 
 export const handler = config => async (req, res) => {
+  if (!req.url.startsWith('/') || req.url.includes('://')) {
+    respond(req, res, {
+      body: '418 - I am a Teapot',
+      code: 418,
+      type: 'teapot-response',
+    })
+
+    return
+  }
+
   const time = process.hrtime()
 
   let hostname = getHostname(req)
@@ -24,15 +34,6 @@ export const handler = config => async (req, res) => {
     return
   }
 
-  if (!req.url.startsWith('/')) {
-    respond(req, res, {
-      body: '418 - I am a Teapot',
-      code: 418,
-      type: 'teapot-response',
-    })
-
-    return
-  }
 
   try {
     await proxyRequest(req, res, { ...config, hostname, time })
