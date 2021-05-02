@@ -8,11 +8,13 @@ import { proxyRequest } from './proxyRequest.mjs'
 
 export const handler = config => async (req, res) => {
   if (!req.url.startsWith('/') || req.url.includes('://')) {
-    respond(req, res, {
-      body: '418 - I am a Teapot',
-      code: 418,
-      type: 'teapot-response',
-    })
+    req.socket.destroy()
+
+    // respond(req, res, {
+    //   body: '418 - I am a Teapot',
+    //   code: 418,
+    //   type: 'teapot-response',
+    // })
 
     return
   }
@@ -33,7 +35,6 @@ export const handler = config => async (req, res) => {
     res.end()
     return
   }
-
 
   try {
     await proxyRequest(req, res, { ...config, hostname, time })
