@@ -42,10 +42,9 @@ export const proxyRequest = (req, res, config) => {
       })
 
       proxyRes.on('error', e => {
-        log.error(`${libName} req error: ${e}`)
+        // log.timeTaken(time, `${libName} proxyRes error: ${e.message}`)
 
         proxyRes.unpipe(res)
-
         reject(e)
       })
     })
