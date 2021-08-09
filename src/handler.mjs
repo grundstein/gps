@@ -40,6 +40,7 @@ export const handler = config => async (req, res) => {
     await proxyRequest(req, res, { ...config, hostname, time })
   } catch (e) {
     log.error(e)
+    res.end()
   }
 }
 
