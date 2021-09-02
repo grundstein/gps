@@ -1,7 +1,6 @@
 import http from 'http'
 
-import { log } from '@grundstein/commons'
-import { respond } from '@grundstein/commons/lib.mjs'
+import { lib, log } from '@grundstein/commons'
 
 const libName = '@grundstein/gps.proxyRequest'
 
@@ -26,33 +25,37 @@ export const proxyRequest = (req, res, config) => {
     },
   }
 
-  return new Promise((resolve, reject) => {
-    const responder = http.get(remoteOptions, proxyRes => {
-      const { statusCode, headers } = proxyRes
-      res.writeHead(statusCode, headers)
+  return new Promise((resolve, reject) =>
+    http
+      .get(remoteOptions, proxyRes => {
+        const { statusCode, headers } = proxyRes
+        res.writeHead(statusCode, headers)
 
-      proxyRes.pipe(res)
+        proxyRes.pipe(res)
 
-      proxyRes.on('end', () => {
-        // log.timeTaken(time, `${libName} req end:`)
+        proxyRes.on('end', () => {
+          log.timeTaken(time, `${libName} req end:`)
 
-        proxyRes.unpipe(res)
+          proxyRes.unpipe(res)
+          proxyRes.destroy()
 
-        resolve()
+          resolve({ proxyRes })
+        })
+
+        proxyRes.on('error', e => {
+          log.timeTaken(time, `${libName} proxyRes error: ${e.message}`)
+
+          proxyRes.unpipe(res)
+          proxyRes.destroy()
+
+          res.end()
+
+          reject(e)
+        })
       })
-
-      proxyRes.on('error', e => {
-        // log.timeTaken(time, `${libName} proxyRes error: ${e.message}`)
-
-        proxyRes.unpipe(res)
+      .on('error', e => {
+        lib.respond(req, res, { body: '500 - proxy error.', code: 500 })
         reject(e)
       })
-    })
-
-    responder.on('error', e => {
-      respond(req, res, { body: '500 - proxy error.', code: 500 })
-
-      reject(e)
-    })
-  })
+  )
 }
