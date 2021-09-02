@@ -1,10 +1,10 @@
 {
   "name": "@grundstein/gps",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.0",
   "author": "Wizards & Witches",
   "homepage": "https://docs.grundstein.it/gps",
   "license": "AGPL-3.0",
-  "description": "NOT YET BENCHMARKED OR IN PRODUCTION! @grundstein/gps. grundstein positioning service, internal dns",
+  "description": "@grundstein/gps. grundstein proxy service, resolves hostnames to  @grundstein/gss servers on the same machine",
   "main": "src/index.mjs",
   "engines": {
     "node": ">=14.14.0"
