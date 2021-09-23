@@ -56,6 +56,6 @@ export const proxyRequest = (req, res, config) => {
       .on('error', e => {
         lib.respond(req, res, { body: '500 - proxy error.', code: 500 })
         reject(e)
-      })
+      }),
   )
 }
