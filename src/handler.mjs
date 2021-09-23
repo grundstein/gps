@@ -3,7 +3,7 @@ import { lib, log } from '@grundstein/commons'
 import { proxyRequest } from './proxyRequest.mjs'
 
 export const handler = config => async (req, res) => {
-  const time = process.hrtime()
+  const time = log.hrtime()
 
   let hostname = lib.getHostname(req)
 
@@ -15,7 +15,7 @@ export const handler = config => async (req, res) => {
       Location: `https://${hostname}${req.url}`,
     })
 
-    // log.server.request(req, res, { type: 'www redirect', time: log.hrtime() })
+    log.server.request(req, res, { type: 'www redirect', time })
     res.end()
     return
   }
