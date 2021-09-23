@@ -46,3 +46,8 @@ gps
 // serve on specific host and port
 gps --host grundstein.it --port 443
 ```
+
+#### changelog
+
+##### v0.0.1
+first release
