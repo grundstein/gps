@@ -21,7 +21,7 @@ export const proxyRequest = (req, res, config) => {
     path: req.url,
     headers: {
       ...req.headers,
-      'x-forwarded-for': proxiedHost,
+      'x-forwarded-for': lib.getClientIp(req),
     },
   }
 
