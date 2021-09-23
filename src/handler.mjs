@@ -1,27 +1,11 @@
-import { log } from '@grundstein/commons'
-
-import { /* formatLog, */ getHostname, respond } from '@grundstein/commons/lib.mjs'
+import { lib, log } from '@grundstein/commons'
 
 import { proxyRequest } from './proxyRequest.mjs'
 
-// import memStore from '@grundstein/mem-store'
-
 export const handler = config => async (req, res) => {
-  if (!req.url.startsWith('/') || req.url.includes('://')) {
-    req.socket.destroy()
-
-    // respond(req, res, {
-    //   body: '418 - I am a Teapot',
-    //   code: 418,
-    //   type: 'teapot-response',
-    // })
-
-    return
-  }
-
   const time = process.hrtime()
 
-  let hostname = getHostname(req)
+  let hostname = lib.getHostname(req)
 
   // strip www from the domain
   if (hostname.startsWith('www.')) {
@@ -31,7 +15,7 @@ export const handler = config => async (req, res) => {
       Location: `https://${hostname}${req.url}`,
     })
 
-    // formatLog(req, res, { type: 'www redirect', time: log.hrtime() })
+    // log.server.request(req, res, { type: 'www redirect', time: log.hrtime() })
     res.end()
     return
   }
