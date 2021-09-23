@@ -1,13 +1,10 @@
 ## @grundstein/gps
 
-### WIP. NOT IN PRODUCTION, TESTED AND/OR BENCHMARKED YET!
+**g**rundstein **p**roxy **s**erver
 
-### gps: grundstein proxy/positioning server
+### WIP. NOT FULLY AUTOMATED, TESTED AND BENCHMARKED YET!
 
 ### features:
-
-#### central config "database"
-serves /config/ which responds with a json file including all grundstein services and their config.
 
 #### 404/500 fallback
 
@@ -18,17 +15,20 @@ serves /config/ which responds with a json file including all grundstein service
 
 publicly proxies various services:
 
-* [gms](https://github.com/grundstein/gms)
-  magic service - serves all static files for magic pages from memory.
-* [gas](https://github.com/grundstein/gas)
-  api service - serves apis for all hosted magic pages.
+##### working:
 * [gss](https://github.com/grundstein/gss)
-  WIP static service - serves bigger static files via cdn instead of gms
+  static service - serves bigger static files via cdn instead of gms
+* [grs](https://github.com/grundstein/grs)
+  redirects http to https as well as www.domain.name to domain.name
+
+##### wip:
+* [gas](https://github.com/grundstein/gas)
+  WIP api service - serves apis for all hosted magic pages.
 * [ghs](https://github.com/grundstein/ghs)
   WIP health service - serves health status pages for all hosted pages
 * [gul](https://github.com/grundstein/gul)
   WIP universal logger - serves logs for all hosted pages, both via rest api and static html.
-* [...]
+* ...
 
 #### installation
 ```bash
@@ -40,7 +40,7 @@ npm i -g @grundstein/gps
 // show full help
 gps --help
 
-// run full gps service on https://127.0.0.1:4443
+// run full gps service on https://127.0.0.1:4343
 gps
 
 // serve on specific host and port
