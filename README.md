@@ -55,5 +55,8 @@ first release
 ##### v0.0.2
 update dependencies
 
-##### v0.0.3 - unreleased
+##### v0.0.3
+update @grundstein/commons to make sure createSecureContext works
+
+##### v0.0.4 - unreleased
 ...
