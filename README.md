@@ -51,3 +51,9 @@ gps --host grundstein.it --port 443
 
 ##### v0.0.1
 first release
+
+##### v0.0.2
+update dependencies
+
+##### v0.0.3 - unreleased
+...
