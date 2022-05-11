@@ -31,11 +31,11 @@
     "url": "https://github.com/grundstein/gps/issues"
   },
   "dependencies": {
-    "@grundstein/commons": "0.0.9"
+    "@grundstein/commons": "0.0.10"
   },
   "devDependencies": {
-    "@magic/format": "0.0.40",
-    "@magic/test": "0.2.11"
+    "@magic/format": "0.0.41",
+    "@magic/test": "0.2.12"
   },
   "keywords": [
     "grundstein",
