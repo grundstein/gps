@@ -61,5 +61,8 @@ update @grundstein/commons to make sure createSecureContext works
 ##### v0.0.4
 update dependencies
 
-#### v0.0.5 - unreleased
+#### v0.0.5
+update dependencies
+
+#### v0.0.6 - unreleased
 ...
