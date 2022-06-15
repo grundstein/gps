@@ -64,5 +64,9 @@ update dependencies
 #### v0.0.5
 update dependencies
 
-#### v0.0.6 - unreleased
+#### v0.0.6
+@grundstein/gas apis can now be proxied on either subdomains or subdirectories, or both.
+the --api-root cli flag can be used to denote the subdirectory to host the api on
+
+#### v0.0.7 - unreleased
 ...
