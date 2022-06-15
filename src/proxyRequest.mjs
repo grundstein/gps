@@ -5,20 +5,29 @@ import { lib, log } from '@grundstein/commons'
 const libName = '@grundstein/gps.proxyRequest'
 
 export const proxyRequest = (req, res, config) => {
-  const { hostname: proxiedHost, staticHost, staticPort, apiHost, apiPort, time } = config
+  const { hostname: proxiedHost, staticHost, staticPort, apiHost, apiPort, apiRoot, time } = config
 
   let hostname = staticHost
   let port = staticPort
+  let path = req.url
+  const root = apiRoot.startsWith('/') ? apiRoot : `/${apiRoot}`
 
-  if (proxiedHost.startsWith('api.')) {
+  const isApiHost = proxiedHost === apiHost
+  const isApiPath = proxiedHost.startsWith('api.') || path.startsWith('/api')
+
+  if (isApiHost && isApiPath) {
     hostname = apiHost
     port = apiPort
+
+    if (path.startsWith(root)) {
+      path = path.substring(root.length)
+    }
   }
 
   const remoteOptions = {
     hostname,
     port,
-    path: req.url,
+    path,
     headers: {
       ...req.headers,
       'x-forwarded-for': lib.getClientIp(req),

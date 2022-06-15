@@ -12,6 +12,7 @@ const opts = {
     ['--static-port'],
     ['--api-host'],
     ['--api-port'],
+    ['--api-root'],
     ['--cert-dir', '--cert', '-c'],
   ],
   default: {
@@ -21,9 +22,10 @@ const opts = {
     '--static-port': 2350,
     '--api-host': 'localhost',
     '--api-port': 2351,
+    '--api-root': '/',
     '--cert-dir': '/etc/letsencrypt/live',
   },
-  single: ['--host', '--port'],
+  single: ['--host', '--port', '--static-host', '--static-port', '--api-host', '--api-port', '--api-root', '--cert-dir'],
   help: {
     name: 'gps: grundstein proxy/positioning server',
     header: 'load balancer. public app entry point. single point of failure.',
@@ -34,6 +36,7 @@ const opts = {
       '--static-port': 'port the proxied static server listens to',
       '--api-host': 'host the proxied api listens to',
       '--api-port': 'port the proxied api listens to',
+      '--api-root': 'root path of the api',
       '--cert-dir': 'directory with ssl ca',
     },
     example: `
