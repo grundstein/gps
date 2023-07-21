@@ -11,10 +11,10 @@
   },
   "engineStrict": true,
   "scripts": {
-    "start": "npm test",
+    "start": "src/bin.mjs",
     "test": "t",
     "format": "f -w",
-    "dev": "src/bin.mjs"
+    "dev": "export NODE_TLS_REJECT_UNAUTHORIZED='0' && src/bin.mjs"
   },
   "bin": {
     "grundstein-proxy-service": "src/bin.mjs",
@@ -31,11 +31,11 @@
     "url": "https://github.com/grundstein/gps/issues"
   },
   "dependencies": {
-    "@grundstein/commons": "0.0.10"
+    "@grundstein/commons": "github:grundstein/commons"
   },
   "devDependencies": {
-    "@magic/format": "0.0.41",
-    "@magic/test": "0.2.12"
+    "@magic/format": "0.0.51",
+    "@magic/test": "0.2.18"
   },
   "keywords": [
     "grundstein",
