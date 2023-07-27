@@ -23,7 +23,7 @@ const opts = {
     '--api-host': 'localhost',
     '--api-port': 2351,
     '--api-root': '/',
-    '--cert-dir': '/etc/letsencrypt/live',
+    // '--cert-dir': '/etc/letsencrypt/live',
   },
   single: ['--host', '--port', '--static-host', '--static-port', '--api-host', '--api-port', '--api-root', '--cert-dir'],
   help: {
