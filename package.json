@@ -1,7 +1,7 @@
 {
   "name": "@grundstein/gps",
   "version": "0.0.6",
-  "author": "Wizards & Witches",
+  "author": "SystemKollektiv",
   "homepage": "https://docs.grundstein.it/gps",
   "license": "AGPL-3.0",
   "description": "@grundstein/gps. grundstein proxy service, resolves hostnames to  @grundstein/gss servers on the same machine",
@@ -47,6 +47,10 @@
     {
       "name": "jascha ehrenreich",
       "github": "jaeh"
+    },
+    {
+      "name": "litto",
+      "github": "mslitto"
     }
   ]
 }
