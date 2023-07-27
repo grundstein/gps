@@ -1,30 +1,62 @@
+import http2 from 'node:http2'
+
 import { lib, log } from '@grundstein/commons'
 
-import { proxyRequest } from './proxyRequest.mjs'
+const { HTTP2_HEADER_PATH } = http2.constants
 
-export const handler = config => async (req, res) => {
-  const time = log.hrtime()
+export const handler = config => {
+  const { host: proxiedHost, staticHost, staticPort, apiHost, apiPort, apiRoot = '/' } = config
 
-  let hostname = lib.getHostname(req)
+  return async (stream, headers) => {
+    let host = staticHost
+    let port = staticPort
+    let url = headers[HTTP2_HEADER_PATH]
+    const root = apiRoot.startsWith('/') ? apiRoot : `/${apiRoot}`
 
-  // strip www from the domain
-  if (hostname.startsWith('www.')) {
-    hostname = hostname.replace('www.', '')
+    const isApiHost = proxiedHost === apiHost
+    const isApiSubdomain = proxiedHost.startsWith('api.')
+    const isApiPath = apiRoot !== '/' && url.startsWith(apiRoot)
 
-    res.writeHead(302, {
-      Location: `https://${hostname}${req.url}`,
+    if (isApiHost && isApiSubdomain && isApiPath) {
+      host = apiHost
+      port = apiPort
+
+      if (url.startsWith(root)) {
+        url = url.substring(root.length)
+      }
+    }
+
+    const client = http2.connect(`https://${host}:${port}`)
+    client.on('error', err => log.server.error(err.code, err.msg))
+
+    const req = client.request({
+      ...headers,
+      // ':authority': 'grundstein',
+      // [http2.constants.HTTP2_HEADER_PATH]: '/',
+      'x-forwarded-for': lib.getClientIp(stream, headers),
     })
 
-    log.server.request(req, res, { type: 'www redirect', time })
-    res.end()
-    return
-  }
+    req.on('response', head => {
+      stream.respond(head)
+    })
 
-  try {
-    await proxyRequest(req, res, { ...config, hostname, time })
-  } catch (e) {
-    log.error(e)
-    res.end()
+    req.setEncoding('utf8')
+
+    let data = ''
+    req.on('data', chunk => {
+      data += chunk
+    })
+
+    req.on('end', () => {
+      stream.end(data)
+      client.close()
+    })
+
+    req.on('error', e => {
+      log.server.error(e.code, e.msg)
+    })
+
+    req.end()
   }
 }
 
