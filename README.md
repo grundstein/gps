@@ -8,34 +8,38 @@
 
 #### 404/500 fallback
 
-* serves 404 page if services are down.
-* serves 50+ error pages if services error.
+- serves 404 page if services are down.
+- serves 50+ error pages if services error.
 
 #### proxy
 
 publicly proxies various services:
 
 ##### working:
-* [gss](https://github.com/grundstein/gss)
+
+- [gss](https://github.com/grundstein/gss)
   static service - serves bigger static files via cdn instead of gms
-* [grs](https://github.com/grundstein/grs)
+- [grs](https://github.com/grundstein/grs)
   redirects http to https as well as www.domain.name to domain.name
 
 ##### wip:
-* [gas](https://github.com/grundstein/gas)
+
+- [gas](https://github.com/grundstein/gas)
   WIP api service - serves apis for all hosted magic pages.
-* [ghs](https://github.com/grundstein/ghs)
+- [ghs](https://github.com/grundstein/ghs)
   WIP health service - serves health status pages for all hosted pages
-* [gul](https://github.com/grundstein/gul)
+- [gul](https://github.com/grundstein/gul)
   WIP universal logger - serves logs for all hosted pages, both via rest api and static html.
-* ...
+- ...
 
 #### installation
+
 ```bash
 npm i -g @grundstein/gps
 ```
 
 #### usage
+
 ```bash
 // show full help
 gps --help
@@ -50,23 +54,30 @@ gps --host grundstein.it --port 443
 #### changelog
 
 ##### v0.0.1
+
 first release
 
 ##### v0.0.2
+
 update dependencies
 
 ##### v0.0.3
+
 update @grundstein/commons to make sure createSecureContext works
 
 ##### v0.0.4
+
 update dependencies
 
 #### v0.0.5
+
 update dependencies
 
 #### v0.0.6
+
 @grundstein/gas apis can now be proxied on either subdomains or subdirectories, or both.
 the --api-root cli flag can be used to denote the subdirectory to host the api on
 
 #### v0.0.7 - unreleased
+
 ...

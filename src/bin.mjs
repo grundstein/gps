@@ -25,7 +25,16 @@ const opts = {
     '--api-root': '/',
     // '--cert-dir': '/etc/letsencrypt/live',
   },
-  single: ['--host', '--port', '--static-host', '--static-port', '--api-host', '--api-port', '--api-root', '--cert-dir'],
+  single: [
+    '--host',
+    '--port',
+    '--static-host',
+    '--static-port',
+    '--api-host',
+    '--api-port',
+    '--api-root',
+    '--cert-dir',
+  ],
   help: {
     name: 'gps: grundstein proxy/positioning server',
     header: 'load balancer. public app entry point. single point of failure.',
