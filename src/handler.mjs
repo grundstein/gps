@@ -67,6 +67,7 @@ export const handler = config => {
 
     req.on('error', e => {
       log.server.error(e.code, e.msg)
+      client.close()
     })
 
     req.end()
