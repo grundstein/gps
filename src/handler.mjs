@@ -67,6 +67,13 @@ export const handler = config => {
 
     req.on('error', e => {
       log.server.error(e.code, e.msg)
+
+      stream.respond({
+        [HTTP2_HEADER_STATUS]: 500,
+      })
+
+      const data = 'Error connecting to proxied server'
+      stream.end(data)
       client.close()
     })
 
