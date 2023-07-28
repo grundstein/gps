@@ -2,7 +2,7 @@ import http2 from 'node:http2'
 
 import { lib, log } from '@grundstein/commons'
 
-const { HTTP2_HEADER_PATH } = http2.constants
+const { HTTP2_HEADER_PATH, HTTP2_HEADER_LOCATION, HTTP2_HEADER_STATUS } = http2.constants
 
 export const handler = config => {
   const { host: proxiedHost, staticHost, staticPort, apiHost, apiPort, apiRoot = '/' } = config
@@ -10,7 +10,22 @@ export const handler = config => {
   return async (stream, headers) => {
     let host = staticHost
     let port = staticPort
-    let url = headers[HTTP2_HEADER_PATH]
+    let url = headers[HTTP2_HEADER_PATH] || '/'
+
+    let hostname = lib.getHostname(headers)
+
+    if (hostname.startsWith('www.')) {
+      const cleanHostname = hostname.slice(4)
+
+      stream.respond({
+        [HTTP2_HEADER_STATUS]: 302,
+        [HTTP2_HEADER_LOCATION]: `https://${cleanHostname}${url}`
+      })
+
+      stream.end()
+      return
+    }
+
     const root = apiRoot.startsWith('/') ? apiRoot : `/${apiRoot}`
 
     const isApiHost = proxiedHost === apiHost
