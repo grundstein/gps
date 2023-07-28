@@ -46,8 +46,6 @@ export const handler = config => {
 
     const req = client.request({
       ...headers,
-      // ':authority': 'grundstein',
-      // [http2.constants.HTTP2_HEADER_PATH]: '/',
       'x-forwarded-for': lib.getClientIp(stream, headers),
     })
 
