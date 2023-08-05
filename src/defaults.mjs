@@ -8,5 +8,5 @@ export const defaults = {
   apiHost: 'localhost',
   apiPort: 2351,
   apiRoot: '/',
-  certDir: path.join('node_modules', '@grundstein', 'commons', 'src', 'certificates'),
+  certDir: path.join(process.cwd(), 'node_modules', '@grundstein', 'commons', 'src', 'certificates'),
 }
