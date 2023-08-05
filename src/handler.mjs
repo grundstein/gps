@@ -19,7 +19,7 @@ export const handler = config => {
 
       stream.respond({
         [HTTP2_HEADER_STATUS]: 302,
-        [HTTP2_HEADER_LOCATION]: `https://${cleanHostname}${url}`
+        [HTTP2_HEADER_LOCATION]: `https://${cleanHostname}${url}`,
       })
 
       stream.end()
