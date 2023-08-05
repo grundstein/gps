@@ -1,8 +1,19 @@
 #!/usr/bin/env node
 
-import { cli } from '@grundstein/commons'
+import { cli, lib } from '@grundstein/commons'
 
 import run from './index.mjs'
+import { defaults } from './defaults.mjs'
+
+const {
+  GPS_HOST = defaults.host,
+  GPS_PORT = defaults.port,
+  GPS_STATIC_HOST = defaults.staticHost,
+  GPS_STATIC_PORT = defaults.staticPort,
+  GPS_API_HOST = defaults.apiHost,
+  GPS_API_PORT = defaults.apiPort,
+  GPS_API_ROOT = defaults.apiRoot,
+} = await lib.addEnv()
 
 const opts = {
   options: [
@@ -16,14 +27,13 @@ const opts = {
     ['--cert-dir', '--cert', '-c'],
   ],
   default: {
-    '--host': '0.0.0.0',
-    '--port': 4343,
-    '--static-host': 'localhost',
-    '--static-port': 2350,
-    '--api-host': 'localhost',
-    '--api-port': 2351,
-    '--api-root': '/',
-    // '--cert-dir': '/etc/letsencrypt/live',
+    '--host': GPS_HOST,
+    '--port': GPS_PORT,
+    '--static-host': GPS_STATIC_HOST,
+    '--static-port': GPS_STATIC_PORT,
+    '--api-host': GPS_API_HOST,
+    '--api-port': GPS_API_PORT,
+    '--api-root': GPS_API_ROOT,
   },
   single: [
     '--host',
