@@ -6,7 +6,7 @@ After=network.target
 [Service]
 Type=simple
 User=grundstein
-ExecStart=/usr/bin/gps
+ExecStart=/home/grundstein/services/gps/src/bin.mjs
 Restart=on-failure
 
 [Install]
