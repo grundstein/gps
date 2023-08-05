@@ -1,3 +1,5 @@
+import path from 'node:path'
+
 export const defaults = {
   host: '0.0.0.0',
   port: 4343,
@@ -6,4 +8,5 @@ export const defaults = {
   apiHost: 'localhost',
   apiPort: 2351,
   apiRoot: '/',
+  certDir: path.join('node_modules', '@grundstein', 'commons', 'src', 'certificates'),
 }

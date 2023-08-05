@@ -13,6 +13,7 @@ const {
   GPS_API_HOST = defaults.apiHost,
   GPS_API_PORT = defaults.apiPort,
   GPS_API_ROOT = defaults.apiRoot,
+  GRUNDSTEIN_CERT_DIR = defaults.certDir,
 } = await lib.addEnv()
 
 const opts = {
@@ -34,6 +35,7 @@ const opts = {
     '--api-host': GPS_API_HOST,
     '--api-port': GPS_API_PORT,
     '--api-root': GPS_API_ROOT,
+    '--cert-dir': GRUNDSTEIN_CERT_DIR,
   },
   single: [
     '--host',
