@@ -53,17 +53,11 @@ export const handler = config => {
       stream.respond(head)
     })
 
-    req.setEncoding('utf8')
-
-    let data = ''
     req.on('data', chunk => {
-      data += chunk
+      stream.write(chunk)
     })
 
     req.on('end', () => {
-      if (data) {
-        stream.write(data)
-      }
       stream.end()
       client.close()
     })
