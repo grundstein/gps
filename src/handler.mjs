@@ -61,7 +61,10 @@ export const handler = config => {
     })
 
     req.on('end', () => {
-      stream.end(data)
+      if (data) {
+        stream.write(data)
+      }
+      stream.end()
       client.close()
     })
 
@@ -73,7 +76,8 @@ export const handler = config => {
       })
 
       const data = 'Error connecting to proxied server'
-      stream.end(data)
+      stream.write(data)
+      stream.end()
       client.close()
     })
 
